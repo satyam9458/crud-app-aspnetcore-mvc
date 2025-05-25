@@ -1,0 +1,72 @@
+﻿@model IEnumerable<DBFirstDemo.Models.Student>
+
+@{
+    ViewData["Title"] = "List";
+}
+@if(TempData["Message"]!=null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Massage!</strong>@TempData["Message"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Massage!</strong> @TempData["success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<h1>List of students</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Roll)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StuName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StuGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StuDob)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StuPhone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Roll)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StuName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StuGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StuDob)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StuPhone)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Roll">Edit</a> |
+                <a class="btn btn-warning" asp-action="Details" asp-route-id="@item.Roll">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Roll">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
